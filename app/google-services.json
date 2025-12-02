@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1015863459980",
+    "project_id": "goout-alma",
+    "storage_bucket": "goout-alma.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015863459980:android:6c17db078af6399cef7ba9",
+        "android_client_info": {
+          "package_name": "com.example.goout"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA62hmSHfawOvDowL5GB2Y3yr4rEhLZFCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
