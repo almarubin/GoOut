@@ -1,14 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schConstraintLayoutemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    android:fillViewport="true"
+    android:background="#0A1A0A">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:gravity="center_horizontal">
+
+        <!-- לוגו קטן למעלה עם הילה -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:id="@+id/signup_glow_view"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:backgroundTint="#39FF14"
+                android:alpha="0.2" />
+
+            <ImageView
+                android:id="@+id/signup_logo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Small Logo" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp" />
+
+        <!-- שדה אימייל -->
+        <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Email"
+            android:textColorHint="#A0A0A0"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="20dp"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="20dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A" />
+
+        <!-- שדה סיסמה -->
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Password"
+            android:textColorHint="#A0A0A0"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="20dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A" />
+
+        <!-- שדה אימות סיסמה -->
+        <EditText
+            android:id="@+id/signup_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Confirm Password"
+            android:textColorHint="#A0A0A0"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="20dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A" />
+
+        <!-- שדה כתובת -->
+        <EditText
+            android:id="@+id/signup_address"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Address"
+            android:textColorHint="#A0A0A0"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="20dp"
+            android:inputType="textPostalAddress"
+            android:layout_marginTop="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A" />
+
+        <!-- שדה גיל -->
+        <EditText
+            android:id="@+id/signup_age"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Age"
+            android:textColorHint="#A0A0A0"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="20dp"
+            android:inputType="number"
+            android:layout_marginTop="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A" />
+
+        <!-- כפתור הרשמה ניאון -->
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Sign Up"
+            android:backgroundTint="#39FF14"
+            android:textColor="#0A1A0A"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:layout_marginTop="30dp" />
+
+        <!-- טקסט סטטוס (שגיאות/הצלחה) -->
+        <TextView
+            android:id="@+id/signup_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <!-- כפתור חזרה להתחברות -->
+        <TextView
+            android:id="@+id/go_to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login"
+            android:textColor="#39FF14"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>
