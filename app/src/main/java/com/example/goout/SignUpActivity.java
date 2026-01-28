@@ -3,6 +3,7 @@ package com.example.goout;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +75,10 @@ public class SignUpActivity extends AppCompatActivity {
                             statusText.setText("Registration Successful!");
                             statusText.setTextColor(0xFF39FF14);
                             // כאן בהמשך אפשר לשמור את הכתובת והגיל ב-Firestore
+                            // מעבר ישיר לעמוד הבית לאחר הרשמה מוצלחת
+                            Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             statusText.setText("Error: " + task.getException().getMessage());
                             statusText.setTextColor(android.graphics.Color.RED);

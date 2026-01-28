@@ -57,6 +57,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             text.setText("Login successful!");
                             text.setTextColor(0xFF39FF14); // ירוק ניאון
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish(); // סוגר את ה-LoginActivity כדי שהמשתמש לא יחזור אליו בלחיצה על 'אחורה'
+
                         } else {
                             text.setText("Error: " + task.getException().getMessage());
                             text.setTextColor(android.graphics.Color.RED);
