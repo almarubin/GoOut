@@ -1,131 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#0A1A0A"> <!-- ירוק כהה מאוד (dark_green_bg) -->
+    android:background="#0A1A0A">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_horizontal">
 
-        <!-- לוגו האפליקציה: כדור ארץ דיסקו עם אפקט הילה -->
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp">
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_marginBottom="10dp"/>
 
-            <!-- שכבת הילה ירוקה מאחורי הלוגו שנותנת אפקט נצנוץ -->
-            <View
-                android:id="@+id/glow_view"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center"
-                  />
-
-            <ImageView
-                android:id="@+id/login_logo"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:contentDescription="GoOut Logo"
-                android:src="@drawable/logo"
-                android:elevation="8dp" />
-        </FrameLayout>
-
+        <!-- שורת ברוכים הבאים החדשה -->
         <TextView
-            android:id="@+id/loginText"
+            android:id="@+id/welcome_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Back"
+            android:text="Welcome to GoOut"
             android:textColor="#FFFFFF"
-            android:textSize="28sp"
+            android:textSize="30dp"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:letterSpacing="0.05" />
+            android:layout_marginBottom="25dp" />
 
-        <TextView
-            android:id="@+id/login_Commend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log in to continue your journey"
-            android:textColor="#A0A0A0"
-            android:textSize="14sp"
-            android:layout_marginBottom="40dp" />
-
-        <!-- שדה קלט אימייל מעוצב -->
         <EditText
             android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:hint="Email"
-            android:textColorHint="#A0A0A0"
+            android:textColorHint="#505050"
             android:textColor="#FFFFFF"
-            android:paddingHorizontal="20dp"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="15dp"
-            android:elevation="2dp" />
+            android:paddingHorizontal="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A"
+            android:layout_marginBottom="15dp" />
 
-        <!-- שדה קלט סיסמה מעוצב -->
         <EditText
             android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:hint="Password"
-            android:textColorHint="#A0A0A0"
-            android:textColor="#FFFFFF"
-            android:paddingHorizontal="20dp"
             android:inputType="textPassword"
-            android:layout_marginBottom="10dp"
-            android:elevation="2dp" />
+            android:textColorHint="#505050"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="#1A331A"
+            android:layout_marginBottom="30dp" />
 
-        <!-- כפתור כניסה בולט בצבע ניאון -->
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="60dp"
             android:text="Login"
             android:backgroundTint="#39FF14"
             android:textColor="#0A1A0A"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textAllCaps="false"
-            android:elevation="4dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textAlignment="center"
-            android:textStyle="bold" />
+            android:textColor="#FFFFFF" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/go_to_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="25dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Don't have an account? "
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/go_to_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:textStyle="bold"
-                android:textColor="#39FF14" />
-        </LinearLayout>
+            android:text="Don't have an account? Sign Up"
+            android:textColor="#39FF14"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

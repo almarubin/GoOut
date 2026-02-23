@@ -14,32 +14,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * מסך התחברות המנהל גם את המעבר לפרגמנט ההרשמה.
+ */
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
+    private View loginFormContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // ודאי שזה השם של ה-XML שלך
+        setContentView(R.layout.activity_login);
+
         // אתחול Firebase
         FirebaseApp.initializeApp(this);
         auth = FirebaseAuth.getInstance();
 
         // קישור רכיבים מה-XML
+        loginFormContainer = findViewById(R.id.login_main_layout); // ודאי שהוספת ID זה למיכל הראשי ב-XML
         EditText email = findViewById(R.id.login_email);
         EditText input = findViewById(R.id.login_password);
         Button button = findViewById(R.id.login_button);
-
-        // תיקון: מקשרים את ה-ID הקיים ב-XML (status_text) למשתנה שנקרא לו 'text'
         TextView text = findViewById(R.id.status_text);
-
-        // תיקון: מקשרים את ה-ID הקיים ב-XML (go_to_register) למשתנה 'button2'
-        TextView button2 = findViewById(R.id.go_to_register);
-
-        View glowView = findViewById(R.id.glow_view);
-        ImageView logo = findViewById(R.id.login_logo);
-
-
+        TextView btnGoToRegister = findViewById(R.id.go_to_register);
 
         // לוגיקת כפתור התחברות
         button.setOnClickListener(v -> {
@@ -56,11 +53,11 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             text.setText("Login successful!");
-                            text.setTextColor(0xFF39FF14); // ירוק ניאון
+                            text.setTextColor(0xFF39FF14);
+
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
-                            finish(); // סוגר את ה-LoginActivity כדי שהמשתמש לא יחזור אליו בלחיצה על 'אחורה'
-
+                            finish();
                         } else {
                             text.setText("Error: " + task.getException().getMessage());
                             text.setTextColor(android.graphics.Color.RED);
@@ -68,11 +65,31 @@ public class LoginActivity extends AppCompatActivity {
                     });
         });
 
-        // מעבר לעמוד הרשמה
-        button2.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-            startActivity(intent);
+        // החלפת תצוגת הלוגין בפרגמנט ההרשמה
+        btnGoToRegister.setOnClickListener(view -> {
+            if (loginFormContainer != null) {
+                // הסתרת הטופס הקיים
+                loginFormContainer.setVisibility(View.GONE);
+
+                // טעינת הפרגמנט לתוך המיכל (נשתמש ב-android.R.id.content כברירת מחדל אם אין קונטיינר ספציפי)
+                getSupportFragmentManager().beginTransaction()
+                        .replace(android.R.id.content, new SignUpFragment())
+                        .addToBackStack(null) // מאפשר חזרה למסך הלוגין בלחיצת כפתור חזור
+                        .commit();
+            }
         });
     }
 
+    /**
+     * ניהול לחיצה על כפתור חזור - אם אנחנו בפרגמנט הרשמה, נחזור ללוגין
+     */
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            if (loginFormContainer != null) loginFormContainer.setVisibility(View.VISIBLE);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
