@@ -41,21 +41,8 @@ public class SignUpFragment extends Fragment {
         Button signUpButton = view.findViewById(R.id.signup_button);
         TextView statusText = view.findViewById(R.id.signup_status_text);
         TextView goToLogin = view.findViewById(R.id.go_to_login);
-        View glowView = view.findViewById(R.id.signup_glow_view);
 
-        // אנימציית הילה ללוגו (כפי שהייתה ב-Activity)
-        if (glowView != null) {
-            ObjectAnimator pulse = ObjectAnimator.ofPropertyValuesHolder(
-                    glowView,
-                    PropertyValuesHolder.ofFloat("scaleX", 1.0f, 1.3f),
-                    PropertyValuesHolder.ofFloat("scaleY", 1.0f, 1.3f),
-                    PropertyValuesHolder.ofFloat("alpha", 0.2f, 0.05f)
-            );
-            pulse.setDuration(1500);
-            pulse.setRepeatCount(ValueAnimator.INFINITE);
-            pulse.setRepeatMode(ValueAnimator.REVERSE);
-            pulse.start();
-        }
+
 
         // לוגיקת כפתור הרשמה
         signUpButton.setOnClickListener(v -> {

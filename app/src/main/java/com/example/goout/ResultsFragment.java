@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fragment המציג את תוצאות החיפוש.
- * בלחיצה על פריט, נפתח דיאלוג המציג פרטים מורחבים כולל תיאור.
+ * Fragment המציג את תוצאות החיפוש בתוך HomeActivity.
+ * משתמש ב-RecyclerView כדי להציג רשימה של כרטיסיות (item_place_card).
  */
 public class ResultsFragment extends Fragment {
 
     private static final String ARG_JSON = "JSON_RESULTS";
 
-    // יצירת מופע חדש של הפרגמנט עם נתוני ה-JSON מה-AI
+    // יצירת מופע חדש והעברת הנתונים ב-Bundle
     public static ResultsFragment newInstance(String jsonResults) {
         ResultsFragment fragment = new ResultsFragment();
         Bundle args = new Bundle();
@@ -36,7 +36,7 @@ public class ResultsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // ניפוח הממשק של מסך התוצאות
+        // שימוש ב-activity_results.xml כעיצוב עבור הפרגמנט
         View view = inflater.inflate(R.layout.activity_results, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.results_recycler_view);
@@ -52,13 +52,13 @@ public class ResultsFragment extends Fragment {
                     JSONArray array = new JSONArray(jsonRaw);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject obj = array.getJSONObject(i);
-                        // פירוק הנתונים לאובייקט Place הכולל את התיאור המפורט
+                        // בניית אובייקט Place מה-JSON שחזר מה-AI
                         placeList.add(new Place(
                                 obj.optString("name", "Unknown"),
                                 obj.optString("distance", "N/A"),
                                 obj.optDouble("rating", 0.0),
                                 obj.optInt("avg_price", 0),
-                                obj.optString("description", "אין תיאור זמין עבור מקום זה.")
+                                obj.optString("description", "אין תיאור זמין.")
                         ));
                     }
                 }
@@ -66,15 +66,14 @@ public class ResultsFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            // הגדרת האדפטר והעברת הנתונים לדיאלוג (שם ותיאור) בעת לחיצה
+            // הגדרת האדפטר עם מאזין ללחיצה (פתיחת דיאלוג פרטים)
             recyclerView.setAdapter(new PlaceAdapter(placeList, place -> {
-                // קריאה לדיאלוג הפרטים המעודכן
                 PlaceDetailDialogFragment dialog = PlaceDetailDialogFragment.newInstance(place.name, place.description);
                 dialog.show(getChildFragmentManager(), "place_detail_dialog");
             }));
         }
 
-        // הגדרת כפתור חזרה למסך הבית
+        // כפתור חזרה: קורא ל-onBackPressed של ה-Activity כדי לסגור את הפרגמנט
         if (backBtn != null) {
             backBtn.setOnClickListener(v -> {
                 if (getActivity() != null) {
@@ -86,9 +85,7 @@ public class ResultsFragment extends Fragment {
         return view;
     }
 
-    /**
-     * מחלקת נתונים המייצגת מקום בודד, כולל שדה תיאור
-     */
+    // מחלקת נתונים פנימית
     static class Place {
         String name, distance, description;
         double rating;
@@ -103,16 +100,11 @@ public class ResultsFragment extends Fragment {
         }
     }
 
-    /**
-     * ממשק לטיפול בלחיצות על פריטים ברשימה
-     */
     interface OnPlaceClickListener {
         void onPlaceClick(Place place);
     }
 
-    /**
-     * אדפטר לניהול ה-RecyclerView ותצוגת הכרטיסיות
-     */
+    // אדפטר לניהול הרשימה
     static class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> {
         private final List<Place> places;
         private final OnPlaceClickListener listener;
@@ -137,14 +129,11 @@ public class ResultsFragment extends Fragment {
             holder.ratingText.setText("דירוג: ⭐ " + p.rating);
             holder.priceText.setText("מחיר ממוצע: ₪" + p.price);
 
-            // הפעלת ה-Listener כשלוחצים על כל הכרטיסייה
             holder.itemView.setOnClickListener(v -> listener.onPlaceClick(p));
         }
 
         @Override
-        public int getItemCount() {
-            return places.size();
-        }
+        public int getItemCount() { return places.size(); }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
             TextView name, distanceText, ratingText, priceText;

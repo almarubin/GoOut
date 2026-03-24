@@ -9,39 +9,65 @@
     app:cardElevation="6dp"
     app:cardBackgroundColor="#1A331A">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/item_place_name"
+        <LinearLayout
+            android:id="@+id/text_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#39FF14"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/item_fav_button"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_place_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/item_place_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Place Name"
+                android:textColor="#39FF14"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/item_place_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFD700"
-            android:layout_marginTop="4dp" />
+            <TextView
+                android:id="@+id/item_place_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distance: 2km"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
 
-        <TextView
-            android:id="@+id/item_place_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#A0A0A0"
-            android:layout_marginTop="4dp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/item_place_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating: ⭐ 4.5"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/item_place_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: ₪150"
+                android:textColor="#A0A0A0"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- כפתור הוספה למועדפים בתוך הכרטיסייה -->
+        <ImageButton
+            android:id="@+id/item_fav_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/btn_star_big_off"
+            app:tint="#39FF14"
+            android:contentDescription="Favorite" />
+
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
